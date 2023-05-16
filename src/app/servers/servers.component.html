@@ -1,11 +1,12 @@
-<!-- one way binding -->
-<!-- <input type="text" class="form-control" (input)="onUpdateServerName($event)"> -->
-
-<!-- two-way binding -->
-<input type="text" class="form-control" [(ngModel)]="serverCreationStatus">
-
-
-<button class="btn btn-primary" [disabled]="!allowNewServer" (click)="onCreateServer()">
-  Add server
-</button>
-<p>{{serverCreationStatus}}</p>
+<div style="display: flex; flex-direction: column; gap: 30px; padding: 20px;">
+  <input type="text"
+  class="form-control"
+  placeholder="Enter Username"
+  [(ngModel)]="username"
+  >
+  <p style="text-align: center;">{{username}}</p>
+  <button class="btn btn-primary"
+  (click)="handleClick()"
+  [disabled]="username.trim().length === 0 ? true : false"
+  >Add</button>
+</div>

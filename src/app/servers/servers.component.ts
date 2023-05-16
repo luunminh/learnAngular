@@ -6,20 +6,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./servers.component.scss'],
 })
 export class ServersComponent {
-  allowNewServer: boolean = false;
-  serverCreationStatus: string = 'No severs created !!!';
-  constructor() {
-    setTimeout(() => {
-      this.allowNewServer = true;
-    }, 2000);
-  }
+  username: string = '';
 
-  onCreateServer() {
-    this.serverCreationStatus =
-      'New server has been created! Name is ' + this.serverCreationStatus;
-  }
-  onUpdateServerName(event: any) {
-    // console.log(event);
-    this.serverCreationStatus = event.target.value;
+  handleClick() {
+    if (this.username.trim().length > 0) {
+      this.username = '';
+    }
   }
 }
