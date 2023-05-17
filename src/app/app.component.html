@@ -1,6 +1,11 @@
-<div class="container">
-    <h1 class="title">Welcome to Angular</h1>
-    <button type="button" (click)="onAlertMsg()" class="btn">
-        Click to see some surprise!!!
-    </button>
+<div style="padding: 100px;">
+  <button
+    (click)="handleShow()"
+    class="btn btn-primary">Display details</button>
+  <p
+    *ngIf="!isHidden"
+    style="margin-top: 20px;">
+    Private password: dlqtsee
+  </p>
+  <p [ngClass]="{active : item > 4}" *ngFor="let item of clickCount">{{item}}</p>
 </div>

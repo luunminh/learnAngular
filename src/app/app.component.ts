@@ -6,12 +6,15 @@ import { Logger } from './logger.service';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  title = 'My very first Project';
-  message = 'Hello Angular';
+  isHidden: boolean = true;
+  clickCount: number[] = [];
 
-  constructor(private logger: Logger) {}
+  constructor() {}
 
-  onAlertMsg() {
-    this.logger.showMsg(this.message);
+  handleShow() {
+    this.isHidden = !this.isHidden;
+    const elm: number = this.clickCount.length + 1;
+    this.clickCount.push(elm);
+    console.log(this.clickCount);
   }
 }
