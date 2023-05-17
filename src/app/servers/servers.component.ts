@@ -9,6 +9,7 @@ export class ServersComponent {
   isCreated = false;
   serverStatus = 'offline';
   serverName = '';
+  servers = ['testserver', 'testserver2'];
 
   constructor() {
     this.serverStatus = Math.random() > 0.5 ? 'online' : 'offline';
@@ -17,6 +18,7 @@ export class ServersComponent {
   onCreate() {
     this.isCreated = true;
     this.serverStatus = 'online';
+    this.servers.push(this.serverName);
   }
 
   getColor() {

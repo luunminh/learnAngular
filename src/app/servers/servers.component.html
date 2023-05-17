@@ -2,8 +2,12 @@
   <input [(ngModel)]="serverName" type="text" class="form-control" style="width: 300px;">
   <button (click)="onCreate()" class="btn btn-primary" style="width: 100px;">Add</button>
 </div>
-<p [ngStyle]="{backgroundColor: getColor()}" *ngIf="isCreated; else noServers">Server was created!! Server name
-  {{serverName}} - {{serverStatus}}</p>
+<p [ngStyle]="{backgroundColor: getColor()}"
+  [ngClass]="{online: serverStatus=== 'online'}"
+  *ngIf="isCreated; else noServers">
+  Server was created!! Server name
+  {{serverName}} - {{serverStatus}}
+</p>
 <ng-template #noServers>
   <p>No server was created !</p>
 </ng-template>
