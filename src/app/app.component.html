@@ -1,6 +1,16 @@
 <div class="container">
-    <h1 class="title">Welcome to Angular</h1>
-    <button type="button" (click)="onAlertMsg()" class="btn">
-        Click to see some surprise!!!
-    </button>
+    <app-cockpit
+    (serverCreated)="onServerAdded($event)"
+    (blueprintCreated)="onBlueprintAdded($event)"
+    ></app-cockpit>
+    <hr>
+    <div class="row">
+        <div class="col-xs-12">
+            <app-server-element
+            *ngFor="let serverElm of serverElements"
+            [element]="serverElm"
+            >
+            </app-server-element>
+        </div>
+    </div>
 </div>
