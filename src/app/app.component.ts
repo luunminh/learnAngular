@@ -32,4 +32,8 @@ export class AppComponent {
             content: blueprintData.serverContent,
         });
     }
+
+    onChangeFirstElm() {
+        this.serverElements[0].name = 'Changed';
+    }
 }

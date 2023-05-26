@@ -6,9 +6,11 @@
     <hr>
     <div class="row">
         <div class="col-xs-12">
+            <button class="btn btn-primary" (click)="onChangeFirstElm()">Change first Element</button>
             <app-server-element
             *ngFor="let serverElm of serverElements"
             [element]="serverElm"
+            [name]="serverElm.name"
             >
             </app-server-element>
         </div>
