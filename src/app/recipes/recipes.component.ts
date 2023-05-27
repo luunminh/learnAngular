@@ -5,4 +5,10 @@ import { Recipe } from './recipe.model';
     templateUrl: './recipes.component.html',
     styleUrls: ['./recipes.component.scss'],
 })
-export class RecipesComponent {}
+export class RecipesComponent {
+    selectedRecipe: Recipe = new Recipe('', '', '');
+
+    constructor() {
+
+    }
+}
