@@ -1,17 +1,18 @@
 import { Component } from '@angular/core';
-import { Logger } from './logger.service';
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-    title = 'My very first Project';
-    message = 'Hello Angular';
+    oddNumbers: number[] = [];
+    evenNumbers: number[] = [];
 
-    constructor(private logger: Logger) {}
-
-    onAlertMsg() {
-        this.logger.showMsg(this.message);
+    onChangeNumber(value: number) {
+        if (value % 2 === 0) {
+            this.evenNumbers.push(value);
+        } else {
+            this.oddNumbers.push(value);
+        }
     }
 }

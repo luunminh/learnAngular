@@ -1,6 +1,26 @@
 <div class="container">
-    <h1 class="title">Welcome to Angular</h1>
-    <button type="button" (click)="onAlertMsg()" class="btn">
-        Click to see some surprise!!!
-    </button>
+    <div class="row">
+        <div class="col-xs-12">
+            <app-game-control
+            (intervalFired)="onChangeNumber($event)"
+            >
+            </app-game-control>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-xs-12">
+            <app-odd
+            *ngFor="let item of oddNumbers"
+            [number]="item"
+            >
+        </app-odd>
+            <app-even
+            *ngFor="let item of evenNumbers"
+            [number]="item"
+            >
+        </app-even>
+
+        </div>
+    </div>
 </div>
