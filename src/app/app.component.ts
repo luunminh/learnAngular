@@ -6,12 +6,8 @@ import { Logger } from './logger.service';
     styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-    title = 'My very first Project';
-    message = 'Hello Angular';
+    onlyOdd: boolean = true;
 
-    constructor(private logger: Logger) {}
-
-    onAlertMsg() {
-        this.logger.showMsg(this.message);
-    }
+    oddNumbers: number[] = [1, 3, 5];
+    evenNumbers: number[] = [2, 4, 6];
 }
