@@ -6,12 +6,26 @@ import { Logger } from './logger.service';
     styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-    title = 'My very first Project';
-    message = 'Hello Angular';
+    accounts = [
+        {
+            name: 'luu nhat minh',
+            status: 'active',
+        },
+        {
+            name: 'nguyen tuan kiet',
+            status: 'inactive',
+        },
+        {
+            name: 'nguyen vu ngoc linh',
+            status: 'unknown',
+        },
+    ];
 
-    constructor(private logger: Logger) {}
+    onAccountAdded(newAccount: { name: string; status: string }) {
+        this.accounts.push(newAccount);
+    }
 
-    onAlertMsg() {
-        this.logger.showMsg(this.message);
+    onStatusChanged(updateInfo: { id: number; newStatus: string }) {
+        this.accounts[updateInfo.id].status = updateInfo.newStatus;
     }
 }

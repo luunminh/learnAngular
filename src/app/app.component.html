@@ -1,6 +1,16 @@
+<br>
 <div class="container">
-    <h1 class="title">Welcome to Angular</h1>
-    <button type="button" (click)="onAlertMsg()" class="btn">
-        Click to see some surprise!!!
-    </button>
+    <div class="row">
+        <div class="col-xs-12 col-md-8 col-md-offset-2">
+            <app-new-account (accountAdded)="onAccountAdded($event)"></app-new-account>
+            <hr>
+            <app-account
+                *ngFor="let acc of accounts; let i = index"
+                [account]="acc"
+                [id]="i"
+                (statusChanged)="onStatusChanged($event)"
+            >
+            </app-account>
+        </div>
+    </div>
 </div>
