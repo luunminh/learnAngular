@@ -4,16 +4,16 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
     selector: 'app-account',
     templateUrl: './account.component.html',
     styleUrls: ['./account.component.scss'],
-    providers: [AccountService],
 })
 export class AccountComponent {
     @Input() account: { name: string; status: string } | undefined;
     @Input() id: number | undefined;
 
-    constructor(private accountService: AccountService) {}
+    constructor(private accountService: AccountService) {
+    }
     onSetTo(newStatus: string) {
         if (this.id !== undefined)
             this.accountService.onStatusChanged({ id: this.id, newStatus });
-        console.log('A server status changed, new status: ' + newStatus);
+        this.accountService.statusUpdate.emit(newStatus);
     }
 }
