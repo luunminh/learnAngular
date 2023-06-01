@@ -3,11 +3,11 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { AccountComponent } from './account/account.component';
-import { NewAccountComponent } from './new-account/new-account.component';
 import { FormsModule } from '@angular/forms';
+import { ActiveAccountComponent } from './active-account/active-account.component';
+import { InactiveAccountComponent } from './inactive-account/inactive-account.component';
 @NgModule({
-    declarations: [AppComponent, AccountComponent, NewAccountComponent],
+    declarations: [AppComponent, ActiveAccountComponent, InactiveAccountComponent],
     imports: [BrowserModule, AppRoutingModule, FormsModule],
     providers: [],
     bootstrap: [AppComponent],
