@@ -1,0 +1,9 @@
+<li class="list-group-item" *ngIf="server !== undefined && i !== undefined">
+    <a href="#"
+        [routerLink]="[i,'edit']"
+        [queryParams]="{allowEdit: '1'}"
+        fragment ="loading"
+    >
+        {{server.serverName}}
+    </a>
+</li>        

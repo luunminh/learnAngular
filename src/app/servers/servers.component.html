@@ -1,0 +1,11 @@
+<h2>This is server page</h2>
+<div class="row">
+    <div class="col-xs-6">
+        <app-server *ngFor="let server of servers; let i = index" [server]="server" [i]="i"></app-server>
+    </div>
+    <div class="col-xs-6">
+        <router-outlet></router-outlet>
+    </div>
+</div>
+<br>
+<a href="#" routerLink="../servers">Reload app</a>
