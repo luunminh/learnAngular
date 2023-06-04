@@ -10,20 +10,8 @@ import { ServersComponent } from './servers/servers.component';
 import { ServerComponent } from './servers/server/server.component';
 import { EditServerComponent } from './servers/edit-server/edit-server.component';
 import { RouterModule, Routes } from '@angular/router';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
-const appRoutes: Routes = [
-    { path: '', component: HomeComponent },
-    {
-        path: 'users',
-        component: UsersComponent,
-        children: [{ path: ':id', component: UserComponent }],
-    },
-    {
-        path: 'servers',
-        component: ServersComponent,
-        children: [{ path: ':id/edit', component: EditServerComponent }],
-    },
-];
 @NgModule({
     declarations: [
         AppComponent,
@@ -33,8 +21,9 @@ const appRoutes: Routes = [
         ServersComponent,
         ServerComponent,
         EditServerComponent,
+        PageNotFoundComponent,
     ],
-    imports: [BrowserModule, AppRoutingModule, RouterModule.forRoot(appRoutes)],
+    imports: [BrowserModule, AppRoutingModule],
     providers: [],
     bootstrap: [AppComponent],
 })

@@ -21,6 +21,7 @@ export class EditServerComponent implements OnInit, OnDestroy, AfterViewInit {
     @ViewChild('inputStatus') inputStatus: ElementRef | undefined;
     paramsSubscription: Subscription | undefined;
     user: { serverName: string; status: string } | undefined;
+    allowEdit = false;
     constructor(
         private serverService: ServerService,
         private route: ActivatedRoute
@@ -34,14 +35,15 @@ export class EditServerComponent implements OnInit, OnDestroy, AfterViewInit {
             (params: Params) => {
                 id = params['id'];
                 this.user = this.serverService.getServerById(id);
-                console.log(this.user);
-
                 if (this.inputName && this.inputStatus && this.user) {
                     this.inputName.nativeElement.value = this.user.serverName;
                     this.inputStatus.nativeElement.value = this.user.status;
                 }
             }
         );
+        this.route.queryParams.subscribe((queryParams: Params) => {
+            this.allowEdit = queryParams['allowEdit'] === '1';
+        });
     }
 
     ngAfterViewInit(): void {
@@ -56,6 +58,12 @@ export class EditServerComponent implements OnInit, OnDestroy, AfterViewInit {
 
         if (this.paramsSubscription) {
             this.paramsSubscription.unsubscribe();
+        }
+    }
+
+    editServer() {
+        if (!this.allowEdit) {
+            alert('Not allow edit');
         }
     }
 }
