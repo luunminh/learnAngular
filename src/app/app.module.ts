@@ -5,9 +5,17 @@ import { AppComponent } from './app.component';
 import { CustomAttributeDirective } from './directive/custom-attribute.directive';
 import { CustomNgIfDirective } from './directive/custom-ngIf.directive';
 import { FlexModule } from '@angular/flex-layout';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 @NgModule({
     declarations: [AppComponent, CustomAttributeDirective, CustomNgIfDirective],
-    imports: [BrowserModule, AppRoutingModule, FlexModule],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        MatSlideToggleModule,
+        FlexModule,
+        BrowserAnimationsModule,
+    ],
     providers: [],
     bootstrap: [AppComponent],
 })
