@@ -16,6 +16,22 @@ export class ProductService {
             name: 'Monsgeek m2',
             description: 'Mechanical gaming keyboard v2022',
         },
+        {
+            name: 'Monsgeek m2',
+            description: 'Mechanical gaming keyboard v2022',
+        },
+        {
+            name: 'Monsgeek m2',
+            description: 'Mechanical gaming keyboard v2022',
+        },
+        {
+            name: 'Monsgeek m2',
+            description: 'Mechanical gaming keyboard v2022',
+        },
+        {
+            name: 'Monsgeek m2',
+            description: 'Mechanical gaming keyboard v2022',
+        },
     ];
 
     getProducts() {

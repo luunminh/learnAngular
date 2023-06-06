@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import { CustomAttributeDirective } from './directive/custom-attribute.directive';
 import { CustomNgIfDirective } from './directive/custom-ngIf.directive';
 import { FlexModule } from '@angular/flex-layout';
+import { FlexLayoutModule } from '@angular/flex-layout';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { HeaderComponent } from './header/header.component';
@@ -15,6 +16,7 @@ import { ProductService } from './products/product.service';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import {MatCardModule} from '@angular/material/card';
 
 @NgModule({
     declarations: [
@@ -31,10 +33,12 @@ import { MatToolbarModule } from '@angular/material/toolbar';
         AppRoutingModule,
         MatSlideToggleModule,
         FlexModule,
+        FlexLayoutModule,
         BrowserAnimationsModule,
         MatToolbarModule,
         MatButtonModule,
         MatIconModule,
+        MatCardModule
     ],
     providers: [ProductService],
     bootstrap: [AppComponent],
