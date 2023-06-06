@@ -1,0 +1,10 @@
+<div *ngIf="selectedProduct">
+    <h3>Product name {{selectedProduct.name}}</h3>
+    <span>Product quantity {{selectedProduct.quantity}}</span>
+    <button class="btn btn-primary" (click)="onDecrease()">-</button>
+    <button class="btn btn-primary" (click)="onIncrease()">+</button>
+</div>
+
+<div *ngIf="!selectedProduct">
+    <p style="color: red;">There are no product selected !!!</p>
+</div>

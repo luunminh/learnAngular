@@ -1,0 +1,13 @@
+<h3>Product list</h3>
+<ul>
+    <li style="cursor: pointer;" *ngFor="let product of products" (click)="selectProduct(product)">
+        {{product.name}}
+    </li>
+</ul>
+
+<app-product-detail [product]="selectedProduct" (addToCart)="onAddToCart($event)">
+</app-product-detail>
+
+<hr>
+<app-cart [selectedProduct]="cartProduct" (triggerIncrease)="onIncreaseItem()"
+    (triggerDecrease)="onDecreaseItem()"></app-cart>

@@ -1,0 +1,8 @@
+<div *ngIf="product">
+    <h2>{{product.name}}</h2>
+    <p>Price : {{product.price}}</p>
+    <button class="btn btn-primary" (click)="onAddToCart()">Add to cart</button>
+</div>
+<div *ngIf="!product">
+    <p>There is no product </p>
+</div>
