@@ -1,14 +1,16 @@
-<mat-card *ngIf="selectedProduct" class="card">
-    <mat-card-header>
-        <mat-card-title>Product name: {{selectedProduct.name}}</mat-card-title>
-        <mat-card-subtitle>Product quantity: {{selectedProduct.quantity}}</mat-card-subtitle>
-    </mat-card-header>
-    <mat-card-actions fxLayout.md="row" fxLayoutGap.md="10px">
-        <button mat-stroked-button color="accent" (click)="onDecrease()">-</button>
-        <button mat-stroked-button color="primary" (click)="onIncrease()">+</button>
-    </mat-card-actions>
-</mat-card>
-
-<div *ngIf="!selectedProduct">
+<h2 mat-dialog-title>My cart</h2>
+<mat-dialog-content *ngIf="cartProducts.length > 0">
+    <mat-card class="card" *ngFor="let product of cartProducts;">
+        <mat-card-header>
+            <mat-card-title>Product name: {{product.name}}</mat-card-title>
+            <mat-card-subtitle>Product quantity: {{product.quantity}}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-actions fxLayout.md="row" fxLayoutGap.md="10px">
+            <button mat-stroked-button color="accent" (click)="onDecrease(product.id)">-</button>
+            <button mat-stroked-button color="primary" (click)="onIncrease(product.id)">+</button>
+        </mat-card-actions>
+    </mat-card>
+</mat-dialog-content>
+<div *ngIf="cartProducts.length === 0">
     <h2 style="color: red;">There are no product in cart !!!</h2>
 </div>

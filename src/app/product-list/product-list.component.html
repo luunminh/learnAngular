@@ -11,7 +11,7 @@
                     <button mat-mini-fab color="primary" aria-label="Example icon button with a menu icon">
                         <mat-icon>search</mat-icon>
                     </button>
-                    <button (click)="selectProduct(product)" mat-button color="primary">View detail</button>
+                    <button (click)="onSelectProduct(product)" mat-button color="primary">View detail</button>
                 </mat-card-content>
             </mat-card>
         </div>
@@ -22,5 +22,5 @@
     </div>
 </div>
 <br>
-<app-cart [selectedProduct]="cartProduct" (triggerIncrease)="onIncreaseItem()"
-    (triggerDecrease)="onDecreaseItem()"></app-cart>
+<app-cart [cartProducts]="cartProducts" (triggerIncrease)="onIncreaseItem($event)"
+    (triggerDecrease)="onDecreaseItem($event)"></app-cart>

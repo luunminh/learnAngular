@@ -1,17 +1,15 @@
 import { Component } from '@angular/core';
-import { Logger } from './logger.service';
+import { Dialog } from '@angular/cdk/dialog';
+import { CartComponent } from './cart/cart.component';
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-    title = 'My very first Project';
-    message = 'Hello Angular';
+    constructor(private dialog: Dialog) {}
 
-    constructor(private logger: Logger) {}
-
-    onAlertMsg() {
-        this.logger.showMsg(this.message);
+    openCart() {
+        const dialogRef = this.dialog.open(CartComponent);
     }
 }

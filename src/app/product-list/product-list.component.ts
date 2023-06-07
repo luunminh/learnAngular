@@ -58,58 +58,66 @@ export class ProductListComponent {
             price: 400000,
         },
     ];
-    cartProduct: CartProduct | undefined;
-
     selectedProduct: Product | undefined;
 
-    selectProduct(product: Product) {
-        console.log('aaa');
+    cartProducts: CartProduct[] = [];
 
+    onSelectProduct(product: Product) {
         this.selectedProduct = product;
     }
-    onAddToCart(product: Product) {
-        const { id, name } = product;
 
-        if (this.cartProduct) {
-            if (this.cartProduct.id === id) {
-                this.cartProduct = {
-                    ...this.cartProduct,
-                    quantity: this.cartProduct.quantity + 1,
-                };
-            } else {
-                this.cartProduct = {
-                    id,
-                    name,
-                    quantity: 1,
-                };
-            }
+    onAddToCart(product: Product) {
+        const { id, name, price } = product;
+
+        if (this.cartProducts.length === 0) {
+            this.cartProducts = [
+                ...this.cartProducts,
+                { id, name, price, quantity: 1 },
+            ];
+            this.cartProducts.push();
         } else {
-            this.cartProduct = {
-                id,
-                name,
-                quantity: 1,
-            };
+            if (this.getCartItemById(id)) {
+                this.cartProducts = this.cartProducts.map((item) => {
+                    if (item.id === id) {
+                        item.quantity += 1;
+                    }
+                    return item;
+                });
+            } else {
+                this.cartProducts = [
+                    ...this.cartProducts,
+                    { id, name, price, quantity: 1 },
+                ];
+            }
         }
     }
 
-    onIncreaseItem() {
-        if (this.cartProduct)
-            this.cartProduct = {
-                ...this.cartProduct,
-                quantity: this.cartProduct.quantity + 1,
-            };
+    getCartItemById(id: number) {
+        const rs = this.cartProducts.find((item) => item.id === id);
+        return rs;
     }
 
-    onDecreaseItem() {
-        if (this.cartProduct) {
-            if (this.cartProduct.quantity > 1) {
-                this.cartProduct = {
-                    ...this.cartProduct,
-                    quantity: this.cartProduct.quantity - 1,
-                };
-            } else {
-                this.cartProduct = undefined;
+    onIncreaseItem(id: number) {
+        this.cartProducts = this.cartProducts.map((item) => {
+            if (item.id === id) {
+                item.quantity += 1;
             }
+            return item;
+        });
+    }
+
+    onDecreaseItem(id: number) {
+        if (this.getCartItemById(id)?.quantity === 1) {
+            this.cartProducts = this.cartProducts.filter(
+                (item) => item.id !== id
+            );
+        } else {
+            this.cartProducts = this.cartProducts.map((item) => {
+                if (item.id === id) {
+                    item.quantity -= 1;
+                }
+                return item;
+            });
         }
     }
 }
@@ -123,5 +131,6 @@ export interface Product {
 export interface CartProduct {
     id: number;
     name: string;
+    price: number;
     quantity: number;
 }
