@@ -1,10 +1,14 @@
-<div *ngIf="selectedProduct">
-    <h3>Product name {{selectedProduct.name}}</h3>
-    <span>Product quantity {{selectedProduct.quantity}}</span>
-    <button class="btn btn-primary" (click)="onDecrease()">-</button>
-    <button class="btn btn-primary" (click)="onIncrease()">+</button>
-</div>
+<mat-card *ngIf="selectedProduct" class="card">
+    <mat-card-header>
+        <mat-card-title>Product name: {{selectedProduct.name}}</mat-card-title>
+        <mat-card-subtitle>Product quantity: {{selectedProduct.quantity}}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-actions fxLayout.md="row" fxLayoutGap.md="10px">
+        <button mat-stroked-button color="accent" (click)="onDecrease()">-</button>
+        <button mat-stroked-button color="primary" (click)="onIncrease()">+</button>
+    </mat-card-actions>
+</mat-card>
 
 <div *ngIf="!selectedProduct">
-    <p style="color: red;">There are no product selected !!!</p>
+    <h2 style="color: red;">There are no product in cart !!!</h2>
 </div>

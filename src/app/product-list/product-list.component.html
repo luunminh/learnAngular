@@ -1,13 +1,26 @@
-<h3>Product list</h3>
-<ul>
-    <li style="cursor: pointer;" *ngFor="let product of products" (click)="selectProduct(product)">
-        {{product.name}}
-    </li>
-</ul>
-
-<app-product-detail [product]="selectedProduct" (addToCart)="onAddToCart($event)">
-</app-product-detail>
-
-<hr>
+<div class="row">
+    <div class="col-lg-7 col-md-7 col-xs-12">
+        <div fxLayout.lg="row wrap" fxLayoutAlign.lg="space-between start" class="item-container">
+            <mat-card class="item" *ngFor="let product of products">
+                <mat-card-header>
+                    <mat-card-title>{{product.name}}</mat-card-title>
+                    <mat-card-subtitle>{{product.price}} VND</mat-card-subtitle>
+                </mat-card-header>
+                <br>
+                <mat-card-content fxFlex.lg="row" fxLayoutAlign.lg="start center" fxLayoutGap.lg="5px">
+                    <button mat-mini-fab color="primary" aria-label="Example icon button with a menu icon">
+                        <mat-icon>search</mat-icon>
+                    </button>
+                    <button (click)="selectProduct(product)" mat-button color="primary">View detail</button>
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </div>
+    <div class="col-lg-5 col-md-5 col-xs-12" style="height:80vh" fxLayout.lg="row" fxLayoutAlign.lg="center center">
+        <app-product-detail [product]=" selectedProduct" (addToCart)="onAddToCart($event)">
+        </app-product-detail>
+    </div>
+</div>
+<br>
 <app-cart [selectedProduct]="cartProduct" (triggerIncrease)="onIncreaseItem()"
     (triggerDecrease)="onDecreaseItem()"></app-cart>

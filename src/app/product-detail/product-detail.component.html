@@ -1,8 +1,9 @@
-<div *ngIf="product">
+<div *ngIf="product" class="product-item">
     <h2>{{product.name}}</h2>
-    <p>Price : {{product.price}}</p>
-    <button class="btn btn-primary" (click)="onAddToCart()">Add to cart</button>
+    <h3 style="font-size: 20px;">Price : {{product.price}} vnđ</h3>
+    <button mat-stroked-button color="primary" (click)="onAddToCart()">Add to cart</button>
 </div>
-<div *ngIf="!product">
-    <p>There is no product </p>
+<div *ngIf="!product" fxLayout.lg="column" fxLayoutAlign.lg="center center">
+    <mat-icon class="icon" color="primary"> mode_comment</mat-icon>
+    <h2 style="font-size: 24px; color: #3f51b5; text-align: center;">There is no product selected </h2>
 </div>

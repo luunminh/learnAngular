@@ -22,12 +22,49 @@ export class ProductListComponent {
             name: 'Macbook Pro 14 inch',
             price: 200000,
         },
+        {
+            id: 4,
+            name: 'Macbook Air M1',
+            price: 300000,
+        },
+        {
+            id: 5,
+            name: 'Lenovo legion 5',
+            price: 200000,
+        },
+        {
+            id: 6,
+            name: 'Mac mini m1',
+            price: 200000,
+        },
+        {
+            id: 7,
+            name: 'Macbook Pro 2019',
+            price: 200000,
+        },
+        {
+            id: 8,
+            name: 'MSI GF63',
+            price: 200000,
+        },
+        {
+            id: 9,
+            name: 'Acer nitro 5',
+            price: 200000,
+        },
+        {
+            id: 10,
+            name: 'Vivo v5',
+            price: 400000,
+        },
     ];
     cartProduct: CartProduct | undefined;
 
     selectedProduct: Product | undefined;
 
     selectProduct(product: Product) {
+        console.log('aaa');
+
         this.selectedProduct = product;
     }
     onAddToCart(product: Product) {
