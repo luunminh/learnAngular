@@ -1,0 +1,22 @@
+<div class="add-container">
+    <button mat-button color="accent">View tasks in calendar</button>
+    <span class="title">What needs to be done?</span>
+    <button mat-button color="accent" (click)="openAddTaskDialog()">Add new</button>
+</div>
+<div fxLayout="column" fxLayoutGap="10px">
+    <app-task-detail *ngFor="let task of tasks" [task]="task">
+    </app-task-detail>
+</div>
+
+<div class="add-container">
+    <div class="left-side">
+        <span>{{tasks.length}} items left</span>
+    </div>
+    <div class="right-side" fxLayout="row" fxFlexAlign="center">
+        <mat-radio-group>
+            <mat-radio-button value="all">All</mat-radio-button>
+            <mat-radio-button value="doing">Doing</mat-radio-button>
+            <mat-radio-button value="finished">Finished</mat-radio-button>
+        </mat-radio-group>
+    </div>
+</div>
