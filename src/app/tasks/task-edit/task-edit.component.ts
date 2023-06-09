@@ -12,12 +12,14 @@ export class TaskEditComponent implements OnInit {
     desc: string | undefined;
     status: string | undefined;
 
-    constructor(@Inject(MAT_DIALOG_DATA) private data: Task) {}
+    constructor(@Inject(MAT_DIALOG_DATA) private data: Task | null) {}
 
     ngOnInit(): void {
-        const { title, description, status } = this.data;
-        this.title = title;
-        this.desc = description;
-        this.status = status;
+        if (this.data) {
+            const { title, description, status } = this.data;
+            this.title = title;
+            this.desc = description;
+            this.status = status;
+        }
     }
 }

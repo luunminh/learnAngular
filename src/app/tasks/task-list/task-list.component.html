@@ -4,16 +4,18 @@
     <button mat-button color="accent" (click)="openAddTaskDialog()">Add new</button>
 </div>
 <div fxLayout="column" fxLayoutGap="10px">
-    <app-task-detail *ngFor="let task of tasks" [task]="task">
+    <app-task-detail *ngFor="let task of filteredTasks" [task]="task">
     </app-task-detail>
 </div>
 
 <div class="add-container">
     <div class="left-side">
-        <span>{{tasks.length}} items left</span>
+        <span>{{filteredTasks.length}} items left</span>
+        <span style="margin: 0 5px">|</span>
+        <span>{{finishedTasksTotal}} done tasks</span>
     </div>
     <div class="right-side" fxLayout="row" fxFlexAlign="center">
-        <mat-radio-group>
+        <mat-radio-group [(ngModel)]="status" (change)="onChangeStatus()">
             <mat-radio-button value="all">All</mat-radio-button>
             <mat-radio-button value="doing">Doing</mat-radio-button>
             <mat-radio-button value="finished">Finished</mat-radio-button>

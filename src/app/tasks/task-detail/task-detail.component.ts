@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { TaskService } from './../task.service';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Task } from '../task.model';
 import { DatePipe } from '@angular/common';
 import { MatDialog } from '@angular/material/dialog';
@@ -22,7 +23,10 @@ export class TaskDetailComponent implements OnInit {
     }
 
     openDeleteDialog() {
-        this.dialog.open(TaskDeleteComponent);
+        if (this.task)
+            this.dialog.open(TaskDeleteComponent, {
+                data: { id: this.task.id },
+            });
     }
 
     ngOnInit(): void {

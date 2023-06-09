@@ -15,8 +15,9 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { DatePipe } from '@angular/common';
 import { MatInputModule } from '@angular/material/input';
 import { TaskEditComponent } from './tasks/task-edit/task-edit.component';
-import {MatSelectModule} from '@angular/material/select';
+import { MatSelectModule } from '@angular/material/select';
 import { TaskDeleteComponent } from './tasks/task-delete/task-delete.component';
+import { TaskService } from './tasks/task.service';
 @NgModule({
     declarations: [
         AppComponent,
@@ -38,9 +39,9 @@ import { TaskDeleteComponent } from './tasks/task-delete/task-delete.component';
         DatePipe,
         MatDialogModule,
         MatInputModule,
-        MatSelectModule
+        MatSelectModule,
     ],
-    providers: [],
+    providers: [TaskService],
     bootstrap: [AppComponent],
 })
 export class AppModule {}
