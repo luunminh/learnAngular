@@ -1,6 +1,15 @@
 <div class="add-container">
+    <mat-select
+        placeholder="Filter"
+        style="width: 120px;"
+        [(ngModel)]="filterType"
+        (selectionChange)="onChangeStatus()"
+    >
+        <mat-option value="title">Title</mat-option>
+        <mat-option value="description">Description</mat-option>
+    </mat-select>
     <button mat-button color="accent">View tasks in calendar</button>
-    <span class="title">What needs to be done?</span>
+
     <button mat-button color="accent" (click)="openAddTaskDialog()">Add new</button>
 </div>
 <div fxLayout="column" fxLayoutGap="10px">

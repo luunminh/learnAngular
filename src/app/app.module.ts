@@ -18,6 +18,8 @@ import { TaskEditComponent } from './tasks/task-edit/task-edit.component';
 import { MatSelectModule } from '@angular/material/select';
 import { TaskDeleteComponent } from './tasks/task-delete/task-delete.component';
 import { TaskService } from './tasks/task.service';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { ReactiveFormsModule } from '@angular/forms';
 @NgModule({
     declarations: [
         AppComponent,
@@ -40,6 +42,8 @@ import { TaskService } from './tasks/task.service';
         MatDialogModule,
         MatInputModule,
         MatSelectModule,
+        MatSnackBarModule,
+        ReactiveFormsModule
     ],
     providers: [TaskService],
     bootstrap: [AppComponent],

@@ -19,6 +19,9 @@ export class TaskDeleteComponent implements OnInit {
     }
 
     onDeleteTask() {
-        if (this.id) this.taskService.onDeleteTask(this.id);
+        if (this.id) {
+            this.taskService.onDeleteTask(this.id);
+            this.taskService.deletedProductEvent.emit(this.id);
+        }
     }
 }

@@ -1,33 +1,55 @@
-<h1 mat-dialog-title>Edit task</h1>
-<div mat-dialog-content style="width: 600px;">
+<h1 mat-dialog-title *ngIf="taskForm">{{taskForm.value['title']? 'Edit Task' : 'Add task'}}</h1>
+<form *ngIf="taskForm"
+    mat-dialog-content
+    style="width: 600px;"
+    [formGroup]="taskForm"
+    (ngSubmit)="onSubmit()"
+>
     <label>Title</label>
-    <mat-form-field style="display: block;" >
+    <mat-form-field style="display: block;">
         <mat-label>Title</mat-label>
-        <input class="form-input" type="text" matInput placeholder="Enter your task title" [(ngModel)]="title">
-        <mat-error>
+        <input
+            required
+            class="form-input"
+            type="text"
+            matInput
+            placeholder="Enter your task title"
+            formControlName="title"
+        >
+        <mat-error
+            *ngIf="title?.errors?.['required'] && title?.errors?.['pattern']"
+        >
             Please enter a valid title address
         </mat-error>
     </mat-form-field>
     <label>Description</label>
     <mat-form-field style="display: block;">
         <mat-label>description</mat-label>
-        <textarea class="form-input" type="text" rows="5" matInput placeholder="Enter your task description"
-            [(ngModel)]="desc"></textarea>
-        <mat-error>
+        <textarea
+            class="form-input"
+            type="text"
+            rows="5"
+            matInput
+            placeholder="Enter your task description"
+            formControlName="desc"
+        ></textarea>
+        <mat-error
+        *ngIf="desc?.errors?.['required'] && desc?.errors?.['pattern']"
+        >
             Please enter a valid description address
         </mat-error>
     </mat-form-field>
     <label style="display: block;">Status</label>
     <mat-form-field>
         <mat-label>Choose status</mat-label>
-        <mat-select [(ngModel)]="status">
+        <mat-select formControlName="status">
             <mat-option value="doing">Doing</mat-option>
             <mat-option value="finished">Finished</mat-option>
         </mat-select>
     </mat-form-field>
-</div>
-<div mat-dialog-actions style="margin-left: 20px;">
-    <button mat-button color="accent">Save</button>
-    <button mat-button mat-dialog-close>Cancel</button>
-</div>
+    <div mat-dialog-actions>
+        <button mat-button color="accent" >Save</button>
+        <button mat-button mat-dialog-close>Cancel</button>
+    </div>
+</form>
 <br>
