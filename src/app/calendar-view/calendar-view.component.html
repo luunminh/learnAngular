@@ -1,0 +1,11 @@
+<div class="containe">
+    <div class="row">
+        <div class="header" fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="start center">
+            <button mat-icon-button color="accent" (click)="onBackToHomePage()">
+                <mat-icon>keyboard_arrow_left</mat-icon>
+            </button>
+            <span style="font-size: 14px; font-style: italic;">Back to home page</span>
+        </div>
+        <full-calendar [options]="calendarOptions"></full-calendar>
+    </div>
+</div>

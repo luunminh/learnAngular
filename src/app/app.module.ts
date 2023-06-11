@@ -26,7 +26,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ReactiveFormsModule } from '@angular/forms';
 import { TaskAddComponent } from './tasks/task-add/task-add.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
-
+import { CalendarViewComponent } from './calendar-view/calendar-view.component';
+import { FullCalendarModule } from '@fullcalendar/angular';
 @NgModule({
     declarations: [
         AppComponent,
@@ -35,6 +36,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
         TaskEditComponent,
         TaskDeleteComponent,
         TaskAddComponent,
+        CalendarViewComponent,
     ],
     imports: [
         BrowserModule,
@@ -53,6 +55,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
         MatSnackBarModule,
         ReactiveFormsModule,
         DragDropModule,
+        FullCalendarModule
     ],
     providers: [
         TaskService,

@@ -7,6 +7,7 @@
             <app-task-list
                 *ngIf="!isOpenAddTask && !isOpenCalendarView"
                 (onChangeAddTask)="onChangeAddTask()"
+                (onChangeCalendarView)="onChangeCalendarView()"
             >
             </app-task-list>
             <app-task-add
@@ -14,6 +15,11 @@
                 (closeAddTask)="onChangeAddTask()"
             >
             </app-task-add>
+            <app-calendar-view
+                *ngIf="isOpenCalendarView"
+                (backToHomePage)="onChangeCalendarView()"
+            >
+            </app-calendar-view>
         </div>
     </div>
 </div>

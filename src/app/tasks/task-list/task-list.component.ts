@@ -64,7 +64,11 @@ export class TaskListComponent implements OnInit {
     }
 
     onOpenAddTask() {
-        this.isOpenAddTask.emit(true);
+        this.isOpenAddTask.emit();
+    }
+
+    onOpenCalendarView() {
+        this.isOpenCalendarView.emit()
     }
 
     drop(event: CdkDragDrop<string[]>) {

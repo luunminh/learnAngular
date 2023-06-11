@@ -1,3 +1,4 @@
+import { Event } from './../calendar-view/event.model';
 import { EventEmitter, Injectable } from '@angular/core';
 import { Task } from './task.model';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -26,7 +27,7 @@ export class TaskService {
             description:
                 'Node lets you build user interfaces out of individual pieces called components. Create your own Node components like Thumbnail, LikeButton, and Video. Then combine them into entire screens, pages, and apps.',
             status: 'doing',
-            createAt: 1677054779,
+            createAt: 1686507641,
         },
     ];
     filteredTasks: Task[] = [];
@@ -57,7 +58,7 @@ export class TaskService {
         });
     }
 
-    async onEditTask(
+    onEditTask(
         id: number,
         task: { title: string; description: string; status: string }
     ) {
@@ -127,5 +128,18 @@ export class TaskService {
                     return 0;
                 });
         }
+    }
+
+    transformToEvent() {
+        let result: Event[] = [];
+        result = this.tasks.map((task) => {
+            return {
+                title: task.title,
+                date: new Date(task.createAt * 1000).toISOString().slice(0, 10),
+            };
+        });
+        console.log({ result });
+
+        return result;
     }
 }
