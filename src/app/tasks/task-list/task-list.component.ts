@@ -10,7 +10,12 @@ import { Task } from '../task.model';
 import { Dialog } from '@angular/cdk/dialog';
 import { TaskService } from '../task.service';
 import { TaskAddComponent } from '../task-add/task-add.component';
-
+import {
+    CdkDragDrop,
+    CdkDropList,
+    CdkDrag,
+    moveItemInArray,
+} from '@angular/cdk/drag-drop';
 @Component({
     selector: 'app-task-list',
     templateUrl: './task-list.component.html',
@@ -60,5 +65,13 @@ export class TaskListComponent implements OnInit {
 
     onOpenAddTask() {
         this.isOpenAddTask.emit(true);
+    }
+
+    drop(event: CdkDragDrop<string[]>) {
+        moveItemInArray(
+            this.filteredTasks,
+            event.previousIndex,
+            event.currentIndex
+        );
     }
 }

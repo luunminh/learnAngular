@@ -12,8 +12,15 @@
 
     <button mat-button color="accent" (click)="onOpenAddTask()">Add new</button>
 </div>
-<div fxLayout="column" fxLayoutGap="10px">
-    <app-task-detail *ngFor="let task of filteredTasks" [task]="task">
+<div fxLayout="column" fxLayoutGap="10px"
+    cdkDropList
+    (cdkDropListDropped)="drop($event)"
+>
+    <app-task-detail
+        *ngFor="let task of filteredTasks"
+        [task]="task"
+        cdkDrag
+    >
     </app-task-detail>
 </div>
 

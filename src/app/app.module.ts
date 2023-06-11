@@ -11,7 +11,11 @@ import { MatButtonModule } from '@angular/material/button';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatCardModule } from '@angular/material/card';
-import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import {
+    MAT_DIALOG_DATA,
+    MatDialogModule,
+    MatDialogRef,
+} from '@angular/material/dialog';
 import { DatePipe } from '@angular/common';
 import { MatInputModule } from '@angular/material/input';
 import { TaskEditComponent } from './tasks/task-edit/task-edit.component';
@@ -21,6 +25,8 @@ import { TaskService } from './tasks/task.service';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ReactiveFormsModule } from '@angular/forms';
 import { TaskAddComponent } from './tasks/task-add/task-add.component';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+
 @NgModule({
     declarations: [
         AppComponent,
@@ -46,10 +52,11 @@ import { TaskAddComponent } from './tasks/task-add/task-add.component';
         MatSelectModule,
         MatSnackBarModule,
         ReactiveFormsModule,
+        DragDropModule,
     ],
     providers: [
         TaskService,
-        {provide: MAT_DIALOG_DATA, useValue: {hasBackdrop: true}},
+        { provide: MAT_DIALOG_DATA, useValue: { hasBackdrop: true } },
     ],
     bootstrap: [AppComponent],
 })
