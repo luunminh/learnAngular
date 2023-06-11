@@ -10,7 +10,7 @@
     </mat-select>
     <button mat-button color="accent">View tasks in calendar</button>
 
-    <button mat-button color="accent" (click)="openAddTaskDialog()">Add new</button>
+    <button mat-button color="accent" (click)="onOpenAddTask()">Add new</button>
 </div>
 <div fxLayout="column" fxLayoutGap="10px">
     <app-task-detail *ngFor="let task of filteredTasks" [task]="task">

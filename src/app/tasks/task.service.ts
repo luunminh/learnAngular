@@ -40,7 +40,7 @@ export class TaskService {
         if (taskType === 'filter') {
             return this.filteredTasks.slice();
         } else {
-            return this.filteredTasks.slice();
+            return this.tasks.slice();
         }
     }
 
@@ -49,6 +49,7 @@ export class TaskService {
     }
 
     onAddTask(newTask: Task) {
+        console.log({ newTask });
         this.tasks = [...this.tasks, newTask];
         this.onFilterTasks();
         this.snackBar.open('Added a new task !!!', 'Close', {

@@ -20,11 +20,10 @@ export class TaskDetailComponent implements OnInit {
         this.dialog.open(TaskEditComponent, {
             data: {
                 task: this.task,
-                isEdit: true
             },
         });
     }
-    
+
     openDeleteDialog() {
         if (this.task)
             this.dialog.open(TaskDeleteComponent, {

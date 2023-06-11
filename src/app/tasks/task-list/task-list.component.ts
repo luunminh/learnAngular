@@ -1,8 +1,15 @@
-import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import {
+    Component,
+    OnChanges,
+    OnInit,
+    SimpleChanges,
+    Output,
+    EventEmitter,
+} from '@angular/core';
 import { Task } from '../task.model';
 import { Dialog } from '@angular/cdk/dialog';
-import { TaskEditComponent } from '../task-edit/task-edit.component';
 import { TaskService } from '../task.service';
+import { TaskAddComponent } from '../task-add/task-add.component';
 
 @Component({
     selector: 'app-task-list',
@@ -10,6 +17,9 @@ import { TaskService } from '../task.service';
     styleUrls: ['./task-list.component.scss'],
 })
 export class TaskListComponent implements OnInit {
+    @Output('onChangeAddTask') isOpenAddTask = new EventEmitter<any>();
+    @Output('onChangeCalendarView') isOpenCalendarView =
+        new EventEmitter<any>();
     status = 'all';
     filterType = 'title';
     filteredTasks: Task[] = [];
@@ -18,6 +28,11 @@ export class TaskListComponent implements OnInit {
 
     ngOnInit(): void {
         this.onChangeStatus();
+
+        this.taskService.addedProductEvent.subscribe((task) => {
+            this.filteredTasks = [...this.filteredTasks, task];
+        });
+
         this.taskService.deletedProductEvent.subscribe((id) => {
             this.filteredTasks = this.filteredTasks.filter(
                 (task) => task.id !== id
@@ -43,9 +58,7 @@ export class TaskListComponent implements OnInit {
         ).length;
     }
 
-    openAddTaskDialog() {
-        this.dialog.open(TaskEditComponent, {
-            data: { task: null, isEdit: false },
-        });
+    onOpenAddTask() {
+        this.isOpenAddTask.emit(true);
     }
 }

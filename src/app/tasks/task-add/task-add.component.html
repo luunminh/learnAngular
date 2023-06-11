@@ -1,0 +1,46 @@
+<div class="container">
+    <div class="row">
+        <mat-card style="width: 800px; padding: 30px">
+            <div style="display: flex; justify-content: space-between; align-items: center; ">
+                <button mat-icon-button color="accent" (click)="onCloseAddTask()">
+                    <mat-icon>keyboard_arrow_left</mat-icon>
+                </button>
+                <h1 class="title">Add a new task</h1>
+            </div>
+            <br>
+            <form *ngIf="taskForm" mat-dialog-content [formGroup]="taskForm" (ngSubmit)="onSubmit()">
+                <label>Title</label>
+                <mat-form-field style="display: block;">
+                    <mat-label>Title</mat-label>
+                    <input required class="form-input" type="text" matInput placeholder="Enter your task title"
+                        formControlName="title">
+                    <mat-error *ngIf="title?.errors?.['required'] && title?.errors?.['pattern']">
+                        Please enter a valid title address
+                    </mat-error>
+                </mat-form-field>
+                <label>Description</label>
+                <mat-form-field style="display: block;">
+                    <mat-label>description</mat-label>
+                    <textarea class="form-input" type="text" rows="5" matInput placeholder="Enter your task description"
+                        formControlName="desc"></textarea>
+                    <mat-error *ngIf="desc?.errors?.['required'] && desc?.errors?.['pattern']">
+                        Please enter a valid description address
+                    </mat-error>
+                </mat-form-field>
+                <label style="display: block;">Status</label>
+                <mat-form-field>
+                    <mat-label>Choose status</mat-label>
+                    <mat-select formControlName="status">
+                        <mat-option value="doing">Doing</mat-option>
+                        <mat-option value="finished">Finished</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <div>
+                    <button mat-button color="accent" [disabled]="taskForm.invalid">Save</button>
+                    <button mat-button (click)="onCloseAddTask()">Cancel</button>
+                </div>
+            </form>
+            <br>
+        </mat-card>
+    </div>
+</div>

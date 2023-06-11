@@ -1,4 +1,4 @@
-<h1 mat-dialog-title *ngIf="taskForm">{{taskForm.value['title']? 'Edit Task' : 'Add task'}}</h1>
+<h1 mat-dialog-title *ngIf="taskForm">Edit Task</h1>
 <form *ngIf="taskForm"
     mat-dialog-content
     style="width: 600px;"
@@ -48,7 +48,7 @@
         </mat-select>
     </mat-form-field>
     <div mat-dialog-actions>
-        <button mat-button color="accent" >Save</button>
+        <button mat-button color="accent" [disabled]="taskForm.invalid">Save</button>
         <button mat-button mat-dialog-close>Cancel</button>
     </div>
 </form>

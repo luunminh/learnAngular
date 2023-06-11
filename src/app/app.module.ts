@@ -11,15 +11,16 @@ import { MatButtonModule } from '@angular/material/button';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatCardModule } from '@angular/material/card';
-import { MatDialogModule } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { DatePipe } from '@angular/common';
 import { MatInputModule } from '@angular/material/input';
 import { TaskEditComponent } from './tasks/task-edit/task-edit.component';
 import { MatSelectModule } from '@angular/material/select';
 import { TaskDeleteComponent } from './tasks/task-delete/task-delete.component';
 import { TaskService } from './tasks/task.service';
-import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ReactiveFormsModule } from '@angular/forms';
+import { TaskAddComponent } from './tasks/task-add/task-add.component';
 @NgModule({
     declarations: [
         AppComponent,
@@ -27,6 +28,7 @@ import { ReactiveFormsModule } from '@angular/forms';
         TaskDetailComponent,
         TaskEditComponent,
         TaskDeleteComponent,
+        TaskAddComponent,
     ],
     imports: [
         BrowserModule,
@@ -43,9 +45,12 @@ import { ReactiveFormsModule } from '@angular/forms';
         MatInputModule,
         MatSelectModule,
         MatSnackBarModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
     ],
-    providers: [TaskService],
+    providers: [
+        TaskService,
+        {provide: MAT_DIALOG_DATA, useValue: {hasBackdrop: true}},
+    ],
     bootstrap: [AppComponent],
 })
 export class AppModule {}

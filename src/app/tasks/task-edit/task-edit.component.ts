@@ -9,21 +9,19 @@ import { TaskService } from '../task.service';
     styleUrls: ['./task-edit.component.scss'],
 })
 export class TaskEditComponent implements OnInit {
-    isEdit = false;
     taskForm: FormGroup | undefined;
 
     constructor(
-        @Inject(MAT_DIALOG_DATA) private data : {task: Task | null, isEdit: boolean},
+        @Inject(MAT_DIALOG_DATA) private data: { task: Task },
         private taskService: TaskService,
-        public dialogRef: MatDialogRef<TaskEditComponent>,
+        public dialogRef: MatDialogRef<TaskEditComponent>
     ) {}
 
     ngOnInit(): void {
         let title = '';
         let desc = '';
         let status = '';
-        if (this.data.isEdit && this.data.task) {
-            this.isEdit = true;
+        if (this.data.task) {
             title = this.data.task.title;
             desc = this.data.task.description;
             status = this.data.task.status;
@@ -53,19 +51,15 @@ export class TaskEditComponent implements OnInit {
     }
 
     onSubmit() {
-        if (this.isEdit && this.data.task && this.taskForm) {
+        if (this.taskForm) {
             const id = this.data.task.id;
             const newTask = {
                 title: this.taskForm.value['title'],
                 description: this.taskForm.value['desc'],
                 status: this.taskForm.value['status'],
             };
-
-            if (this.isEdit) {
-                this.taskService.onEditTask(id, newTask);
-                this.taskService.updatedProductEvent.emit(id);
-            } else {
-            }
+            this.taskService.onEditTask(id, newTask);
+            this.taskService.updatedProductEvent.emit(id);
             this.dialogRef.close();
         } else {
         }
