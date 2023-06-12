@@ -5,13 +5,4 @@ import { Logger } from './logger.service';
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.scss'],
 })
-export class AppComponent {
-    title = 'My very first Project';
-    message = 'Hello Angular';
-
-    constructor(private logger: Logger) {}
-
-    onAlertMsg() {
-        this.logger.showMsg(this.message);
-    }
-}
+export class AppComponent {}

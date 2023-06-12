@@ -1,6 +1,16 @@
 <div class="container">
-    <h1 class="title">Welcome to Angular</h1>
-    <button type="button" (click)="onAlertMsg()" class="btn">
-        Click to see some surprise!!!
-    </button>
+    <div class="row">
+        <br>
+        <div class=" col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+            <a routerLink="/">Home</a> |
+            <a [routerLink]="['user', 1]">User 1</a> |
+            <a [routerLink]="['user', 2]">User 2</a>
+        </div>
+    </div>
+</div>
+<hr>
+<div class="row">
+    <div class="col-xs-12 col-md-8 col-sm-offset-1 col-md-offset-2">
+        <router-outlet></router-outlet>
+    </div>
 </div>
