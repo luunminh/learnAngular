@@ -1,3 +1,4 @@
+import { PostService } from './post.service';
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
@@ -9,20 +10,29 @@ import { Post } from './post.model';
 })
 export class AppComponent implements OnInit {
     loadedPosts = [];
+    isLoading = true;
+    error = null;
 
-    constructor(private http: HttpClient) {}
+    constructor(private http: HttpClient, private postService: PostService) {}
 
     ngOnInit(): void {
-        this.fetchPosts();
+        this.isLoading = true;
+        this.postService.fetchPosts().subscribe(
+            (posts) => {
+                this.loadedPosts = posts;
+                this.isLoading = false;
+                console.log({ posts });
+            },
+            (error) => {
+                this.error = error.message;
+                console.log(error);
+            }
+        );
     }
 
     onCreatePost(postData: Post) {
-        // Send http request
-        this.http
-            .post<{ name: string }>(
-                'https://angular-practice-6f5b3-default-rtdb.asia-southeast1.firebasedatabase.app/posts.json',
-                postData
-            )
+        this.postService
+            .createAndStorePost(postData.title, postData.content)
             .subscribe((resData) => {
                 console.log(resData);
             });
@@ -30,31 +40,23 @@ export class AppComponent implements OnInit {
 
     onFetchPosts() {
         //send http request
-        this.fetchPosts();
-    }
-
-    private fetchPosts() {
-        this.http
-            .get<{ [key: string]: Post }>(
-                'https://angular-practice-6f5b3-default-rtdb.asia-southeast1.firebasedatabase.app/posts.json'
-            )
-            .pipe(
-                map((responseData) => {
-                    const postsArr: Post[] = [];
-                    for (const key in responseData) {
-                        //check key is not prototype
-                        if (responseData.hasOwnProperty(key)) {
-                            postsArr.push({ ...responseData[key], id: key });
-                        }
-                    }
-                    return postsArr;
-                })
-            )
-            .subscribe((posts) => {
+        this.isLoading = true;
+        this.postService.fetchPosts().subscribe(
+            (posts) => {
                 this.loadedPosts = posts;
+                this.isLoading = false;
                 console.log({ posts });
-            });
+            },
+            (error) => {
+                this.error = error.message;
+                console.log(error);
+            }
+        );
     }
 
-    onClearPosts() {}
+    onClearPosts() {
+        this.postService.deletePosts().subscribe(() => {
+            this.loadedPosts = [];
+        });
+    }
 }
