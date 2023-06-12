@@ -1,7 +1,8 @@
 import { Event } from './../calendar-view/event.model';
-import { EventEmitter, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Task } from './task.model';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Subject } from 'rxjs-compat';
 @Injectable({ providedIn: 'root' })
 export class TaskService {
     tasks: Task[] = [
@@ -31,9 +32,9 @@ export class TaskService {
         },
     ];
     filteredTasks: Task[] = [];
-    addedProductEvent = new EventEmitter<any>();
-    updatedProductEvent = new EventEmitter<any>();
-    deletedProductEvent = new EventEmitter<any>();
+    addedProductEvent = new Subject<Task>();
+    updatedProductEvent = new Subject<number>();
+    deletedProductEvent = new Subject<number>();
 
     constructor(private snackBar: MatSnackBar) {}
 

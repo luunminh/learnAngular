@@ -53,7 +53,7 @@ export class TaskAddComponent implements OnInit {
                 createAt:  Math.floor(new Date().getTime() / 1000),
             };
             this.taskService.onAddTask(newTask);
-            this.taskService.addedProductEvent.emit(newTask);
+            this.taskService.addedProductEvent.next(newTask);
             this.onCloseAddTask();
         } else {
         }

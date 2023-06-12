@@ -59,7 +59,7 @@ export class TaskEditComponent implements OnInit {
                 status: this.taskForm.value['status'],
             };
             this.taskService.onEditTask(id, newTask);
-            this.taskService.updatedProductEvent.emit(id);
+            this.taskService.updatedProductEvent.next(id);
             this.dialogRef.close();
         } else {
         }
