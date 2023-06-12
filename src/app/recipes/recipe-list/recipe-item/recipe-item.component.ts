@@ -19,6 +19,6 @@ export class RecipeItemComponent {
 
     onSelected() {
         this.router.navigate([`${this.idx}`], {relativeTo: this.route});
-        this.recipeService.recipeSelected.emit(this.recipe);
+        this.recipeService.recipeSelected.next(this.recipe);
     }
 }
