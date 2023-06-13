@@ -43,7 +43,7 @@ export class TaskAddComponent implements OnInit {
 
     async onSubmit() {
         if (this.taskForm) {
-            const currentTasks = this.taskService.getTasks('noFilter');
+            const currentTasks = this.taskService.getTasks();
             const id = currentTasks[currentTasks.length - 1].id + 1;
             const newTask = await {
                 id,

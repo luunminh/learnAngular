@@ -1,7 +1,6 @@
 import { Event } from '../model/event.model';
 import { Injectable } from '@angular/core';
-import { Task } from '../model/task.model';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { Status, Task } from '../model/task.model';
 import { Subject } from 'rxjs-compat';
 import { SnackbarService } from './snackbar.service';
 
@@ -13,7 +12,7 @@ export class TaskService {
             title: 'Learn Angular',
             description:
                 'First App Tutorial - Angular Homes gets you started with Angular The First App tutorial guides you through building an Angular app by taking you step by step through the fundamentals of building an application in Angular.',
-            status: 'doing',
+            status: Status.doing,
             createAt: 1677054779,
         },
         {
@@ -21,7 +20,7 @@ export class TaskService {
             title: 'Learn ReactJS',
             description:
                 'Lib React lets you build user interfaces out of individual pieces called components. Create your own React components like Thumbnail, LikeButton, and Video. Then combine them into entire screens, pages, and apps.',
-            status: 'finished',
+            status: Status.finished,
             createAt: 1677054779,
         },
         {
@@ -29,26 +28,18 @@ export class TaskService {
             title: 'Learn NodeJS',
             description:
                 'Node lets you build user interfaces out of individual pieces called components. Create your own Node components like Thumbnail, LikeButton, and Video. Then combine them into entire screens, pages, and apps.',
-            status: 'doing',
+            status: Status.doing,
             createAt: 1686507641,
         },
     ];
-    filteredTasks: Task[] = [];
     addedProductEvent = new Subject<Task>();
     updatedProductEvent = new Subject<number>();
     deletedProductEvent = new Subject<number>();
 
-    constructor(
-        private snackBar: MatSnackBar,
-        private snackbarService: SnackbarService
-    ) {}
+    constructor(private snackbarService: SnackbarService) {}
 
-    getTasks(taskType = 'filter') {
-        if (taskType === 'filter') {
-            return this.filteredTasks.slice();
-        } else {
-            return this.tasks.slice();
-        }
+    getTasks() {
+        return this.tasks.slice();
     }
 
     getTaskById(id: number) {
@@ -56,7 +47,6 @@ export class TaskService {
     }
 
     onAddTask(newTask: Task) {
-        console.log({ newTask });
         this.tasks = [...this.tasks, newTask];
         this.onFilterTasks();
         this.snackbarService.onOpenSnackBar(
@@ -68,7 +58,7 @@ export class TaskService {
 
     onEditTask(
         id: number,
-        task: { title: string; description: string; status: string }
+        task: { title: string; description: string; status: Status }
     ) {
         this.tasks = this.tasks.map((curTask) => {
             if (curTask.id === id) {
@@ -99,20 +89,22 @@ export class TaskService {
         );
     }
 
-    onFilterTasks(status: string = 'all', filterType = 'title') {
+    //should be return a filtered array and remove the property filtered arr
+    onFilterTasks(status: string | Status = 'all', filterType = 'title') {
+        let filteredTasks = this.tasks.slice();
         switch (status) {
             case 'all':
-                this.filteredTasks = [...this.tasks];
+                filteredTasks = [...this.tasks];
                 break;
             default:
-                this.filteredTasks = this.tasks.filter(
+                filteredTasks = this.tasks.filter(
                     (task) => task.status === status
                 );
                 break;
         }
         switch (filterType) {
             case 'title':
-                this.filteredTasks.sort((a, b) => {
+                filteredTasks.sort((a, b) => {
                     const titleA = a.title.toUpperCase();
                     const titleB = b.title.toUpperCase();
 
@@ -127,7 +119,7 @@ export class TaskService {
                 });
                 break;
             case 'description':
-                this.filteredTasks.sort((a, b) => {
+                filteredTasks.sort((a, b) => {
                     const descA = a.description.toUpperCase();
                     const descB = b.description.toUpperCase();
 
@@ -139,7 +131,9 @@ export class TaskService {
                     }
                     return 0;
                 });
+                break;
         }
+        return filteredTasks;
     }
 
     transformToEvent() {
@@ -150,7 +144,6 @@ export class TaskService {
                 date: new Date(task.createAt * 1000).toISOString().slice(0, 10),
             };
         });
-        console.log({ result });
 
         return result;
     }

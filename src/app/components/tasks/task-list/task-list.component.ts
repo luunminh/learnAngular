@@ -2,20 +2,12 @@ import {
     Component,
     OnChanges,
     OnInit,
-    SimpleChanges,
     Output,
     EventEmitter,
 } from '@angular/core';
 import { Task } from '../../../model/task.model';
-import { Dialog } from '@angular/cdk/dialog';
 import { TaskService } from '../../../services/task.service';
-import { TaskAddComponent } from '../task-add/task-add.component';
-import {
-    CdkDragDrop,
-    CdkDropList,
-    CdkDrag,
-    moveItemInArray,
-} from '@angular/cdk/drag-drop';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 @Component({
     selector: 'app-task-list',
     templateUrl: './task-list.component.html',
@@ -30,7 +22,7 @@ export class TaskListComponent implements OnInit {
     filterType = 'title';
     filteredTasks: Task[] = [];
     finishedTasksTotal: number = 0;
-    constructor(private dialog: Dialog, private taskService: TaskService) {}
+    constructor(private taskService: TaskService) {}
 
     ngOnInit(): void {
         this.onChangeStatus();
@@ -57,8 +49,10 @@ export class TaskListComponent implements OnInit {
     }
 
     onChangeStatus() {
-        this.taskService.onFilterTasks(this.status, this.filterType);
-        this.filteredTasks = this.taskService.getTasks();
+        this.filteredTasks = this.taskService.onFilterTasks(
+            this.status,
+            this.filterType
+        );
         this.finishedTasksTotal = this.filteredTasks.filter(
             (task) => task.status === 'finished'
         ).length;
