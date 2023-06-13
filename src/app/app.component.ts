@@ -1,21 +1,26 @@
 import { PostService } from './post.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { Post } from './post.model';
+import { Subscription } from 'rxjs';
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.scss'],
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, OnDestroy {
     loadedPosts = [];
     isLoading = true;
     error = null;
-
+    subErr: Subscription;
     constructor(private http: HttpClient, private postService: PostService) {}
 
     ngOnInit(): void {
+        this.subErr = this.postService.error.subscribe((errorMessage) => {
+            this.error = errorMessage;
+        });
+
         this.isLoading = true;
         this.postService.fetchPosts().subscribe(
             (posts) => {
@@ -31,11 +36,7 @@ export class AppComponent implements OnInit {
     }
 
     onCreatePost(postData: Post) {
-        this.postService
-            .createAndStorePost(postData.title, postData.content)
-            .subscribe((resData) => {
-                console.log(resData);
-            });
+        this.postService.createAndStorePost(postData.title, postData.content);
     }
 
     onFetchPosts() {
@@ -58,5 +59,9 @@ export class AppComponent implements OnInit {
         this.postService.deletePosts().subscribe(() => {
             this.loadedPosts = [];
         });
+    }
+
+    ngOnDestroy(): void {
+        this.subErr.unsubscribe();
     }
 }

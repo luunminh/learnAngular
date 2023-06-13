@@ -1,19 +1,29 @@
+import { Subject } from 'rxjs-compat';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Post } from './post.model';
 import { map } from 'rxjs/operators';
-
 @Injectable({ providedIn: 'root' })
 export class PostService {
+    error = new Subject<string>();
     constructor(private http: HttpClient) {}
 
     createAndStorePost(title: string, content: string) {
         const postData: Post = { title, content };
         // Send http request
-        return this.http.post<{ name: string }>(
-            'https://angular-practice-6f5b3-default-rtdb.asia-southeast1.firebasedatabase.app/posts.json',
-            postData
-        );
+        return this.http
+            .post<{ name: string }>(
+                'https://angular-practice-6f5b3-default-rtdb.asia-southeast1.firebasedatabase.app/posts.json',
+                postData
+            )
+            .subscribe(
+                (post) => {
+                    console.log({ post });
+                },
+                (error) => {
+                    this.error.next(error.message);
+                }
+            );
     }
 
     fetchPosts() {
