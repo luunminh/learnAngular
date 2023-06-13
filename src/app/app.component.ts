@@ -1,5 +1,6 @@
 import { Dialog } from '@angular/cdk/dialog';
 import { Component, Output } from '@angular/core';
+import { TaskListComponent } from './components/tasks/task-list/task-list.component';
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',

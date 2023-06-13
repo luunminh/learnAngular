@@ -4,8 +4,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { TaskListComponent } from './tasks/task-list/task-list.component';
-import { TaskDetailComponent } from './tasks/task-detail/task-detail.component';
+import { TaskListComponent } from './components/tasks/task-list/task-list.component';
+import { TaskDetailComponent } from './components/tasks/task-detail/task-detail.component';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -18,15 +18,15 @@ import {
 } from '@angular/material/dialog';
 import { DatePipe } from '@angular/common';
 import { MatInputModule } from '@angular/material/input';
-import { TaskEditComponent } from './tasks/task-edit/task-edit.component';
+import { TaskEditComponent } from './components/tasks/task-edit/task-edit.component';
 import { MatSelectModule } from '@angular/material/select';
-import { TaskDeleteComponent } from './tasks/task-delete/task-delete.component';
+import { TaskDeleteComponent } from './components/tasks/task-delete/task-delete.component';
 import { TaskService } from './services/task.service';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ReactiveFormsModule } from '@angular/forms';
-import { TaskAddComponent } from './tasks/task-add/task-add.component';
+import { TaskAddComponent } from './components/tasks/task-add/task-add.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
-import { CalendarViewComponent } from './calendar-view/calendar-view.component';
+import { CalendarViewComponent } from './components/calendar-view/calendar-view.component';
 import { FullCalendarModule } from '@fullcalendar/angular';
 @NgModule({
     declarations: [

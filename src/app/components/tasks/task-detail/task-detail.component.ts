@@ -1,6 +1,6 @@
-import { TaskService } from '../../services/task.service';
+import { TaskService } from '../../../services/task.service';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Task } from '../../model/task.model';
+import { Task } from '../../../model/task.model';
 import { DatePipe } from '@angular/common';
 import { MatDialog } from '@angular/material/dialog';
 import { TaskEditComponent } from '../task-edit/task-edit.component';

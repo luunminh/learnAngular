@@ -6,9 +6,9 @@ import {
     Output,
     EventEmitter,
 } from '@angular/core';
-import { Task } from '../../model/task.model';
+import { Task } from '../../../model/task.model';
 import { Dialog } from '@angular/cdk/dialog';
-import { TaskService } from '../../services/task.service';
+import { TaskService } from '../../../services/task.service';
 import { TaskAddComponent } from '../task-add/task-add.component';
 import {
     CdkDragDrop,
