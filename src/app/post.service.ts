@@ -1,8 +1,9 @@
 import { Subject } from 'rxjs-compat';
+import { throwError } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Post } from './post.model';
-import { map } from 'rxjs/operators';
+import { map, catchError } from 'rxjs/operators';
 @Injectable({ providedIn: 'root' })
 export class PostService {
     error = new Subject<string>();
@@ -37,10 +38,16 @@ export class PostService {
                     for (const key in responseData) {
                         //check key is not prototype
                         if (responseData.hasOwnProperty(key)) {
-                            postsArr.push({ ...responseData[key], id: key });
+                            postsArr.push({
+                                ...responseData[key],
+                                id: key,
+                            });
                         }
                     }
                     return postsArr;
+                }),
+                catchError((err) => {
+                    return throwError(err);
                 })
             );
     }
