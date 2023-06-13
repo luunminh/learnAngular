@@ -1,7 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { CalendarOptions } from '@fullcalendar/core'; // useful for typechecking
 import dayGridPlugin from '@fullcalendar/daygrid';
-import { TaskService } from '../tasks/task.service';
+import { TaskService } from '../services/task.service';
 @Component({
     selector: 'app-calendar-view',
     templateUrl: './calendar-view.component.html',

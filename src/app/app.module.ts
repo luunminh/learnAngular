@@ -21,7 +21,7 @@ import { MatInputModule } from '@angular/material/input';
 import { TaskEditComponent } from './tasks/task-edit/task-edit.component';
 import { MatSelectModule } from '@angular/material/select';
 import { TaskDeleteComponent } from './tasks/task-delete/task-delete.component';
-import { TaskService } from './tasks/task.service';
+import { TaskService } from './services/task.service';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ReactiveFormsModule } from '@angular/forms';
 import { TaskAddComponent } from './tasks/task-add/task-add.component';
@@ -55,7 +55,7 @@ import { FullCalendarModule } from '@fullcalendar/angular';
         MatSnackBarModule,
         ReactiveFormsModule,
         DragDropModule,
-        FullCalendarModule
+        FullCalendarModule,
     ],
     providers: [
         TaskService,

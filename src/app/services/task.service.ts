@@ -1,8 +1,10 @@
-import { Event } from './../calendar-view/event.model';
+import { Event } from '../model/event.model';
 import { Injectable } from '@angular/core';
-import { Task } from './task.model';
+import { Task } from '../model/task.model';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Subject } from 'rxjs-compat';
+import { SnackbarService } from './snackbar.service';
+
 @Injectable({ providedIn: 'root' })
 export class TaskService {
     tasks: Task[] = [
@@ -36,7 +38,10 @@ export class TaskService {
     updatedProductEvent = new Subject<number>();
     deletedProductEvent = new Subject<number>();
 
-    constructor(private snackBar: MatSnackBar) {}
+    constructor(
+        private snackBar: MatSnackBar,
+        private snackbarService: SnackbarService
+    ) {}
 
     getTasks(taskType = 'filter') {
         if (taskType === 'filter') {
@@ -54,9 +59,11 @@ export class TaskService {
         console.log({ newTask });
         this.tasks = [...this.tasks, newTask];
         this.onFilterTasks();
-        this.snackBar.open('Added a new task !!!', 'Close', {
-            duration: 2000,
-        });
+        this.snackbarService.onOpenSnackBar(
+            'Added a new task !!!',
+            'Close',
+            2000
+        );
     }
 
     onEditTask(
@@ -75,17 +82,21 @@ export class TaskService {
             return curTask;
         });
         this.onFilterTasks();
-        this.snackBar.open('Updated your task !!!', 'Close', {
-            duration: 2000,
-        });
+        this.snackbarService.onOpenSnackBar(
+            'Updated your task !!!',
+            'Close',
+            2000
+        );
     }
 
     onDeleteTask(id: number) {
         this.tasks = this.tasks.filter((task) => task.id !== id);
         this.onFilterTasks();
-        this.snackBar.open('Delete successful', 'Close', {
-            duration: 2000,
-        });
+        this.snackbarService.onOpenSnackBar(
+            'Deleted successful!',
+            'Close',
+            2000
+        );
     }
 
     onFilterTasks(status: string = 'all', filterType = 'title') {

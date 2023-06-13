@@ -6,9 +6,9 @@ import {
     Output,
     EventEmitter,
 } from '@angular/core';
-import { Task } from '../task.model';
+import { Task } from '../../model/task.model';
 import { Dialog } from '@angular/cdk/dialog';
-import { TaskService } from '../task.service';
+import { TaskService } from '../../services/task.service';
 import { TaskAddComponent } from '../task-add/task-add.component';
 import {
     CdkDragDrop,
@@ -20,6 +20,7 @@ import {
     selector: 'app-task-list',
     templateUrl: './task-list.component.html',
     styleUrls: ['./task-list.component.scss'],
+    providers: [], //global > module > component services
 })
 export class TaskListComponent implements OnInit {
     @Output('onChangeAddTask') isOpenAddTask = new EventEmitter<any>();
@@ -68,7 +69,7 @@ export class TaskListComponent implements OnInit {
     }
 
     onOpenCalendarView() {
-        this.isOpenCalendarView.emit()
+        this.isOpenCalendarView.emit();
     }
 
     drop(event: CdkDragDrop<string[]>) {

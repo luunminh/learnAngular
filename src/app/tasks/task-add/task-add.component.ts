@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Output, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { TaskService } from '../task.service';
+import { TaskService } from '../../services/task.service';
 
 @Component({
     selector: 'app-task-add',
@@ -50,7 +50,7 @@ export class TaskAddComponent implements OnInit {
                 title: this.taskForm.value['title'],
                 description: this.taskForm.value['desc'],
                 status: this.taskForm.value['status'],
-                createAt:  Math.floor(new Date().getTime() / 1000),
+                createAt: Math.floor(new Date().getTime() / 1000),
             };
             this.taskService.onAddTask(newTask);
             this.taskService.addedProductEvent.next(newTask);
