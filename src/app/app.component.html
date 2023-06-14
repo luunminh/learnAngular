@@ -1,0 +1,36 @@
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1">
+            <h1>Project Information</h1>
+            <form *ngIf="projectForm" class="form-group" [formGroup]="projectForm" (ngSubmit)="onSubmit()">
+                <div class="form-group">
+                    <label for="">Project name</label>
+                    <input type="text" class="form-control" formControlName="name">
+                    <span class="alert-warning"
+                        *ngIf="!projectForm.get('name').valid && projectForm.get('name').touched">
+                        Please enter a valid name
+                    </span>
+                </div>
+                <div class="form-group">
+                    <label for="">Email</label>
+                    <input type="email" class="form-control" formControlName="email">
+                    <span class="alert-warning"
+                        *ngIf="!projectForm.get('email').valid && projectForm.get('email').touched">Please enter a valid
+                        email</span>
+                </div>
+                <div class="form-group">
+                    <label for="">Status</label>
+                    <select class="form-control" formControlName="status">
+                        <option value="stable">stable</option>
+                        <option value="critical">critical</option>
+                        <option value="finished">finished</option>
+                    </select>
+                    <span class="alert-warning"
+                        *ngIf="!projectForm.get('status').valid && projectForm.get('status').touched">Please select one
+                        status</span>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
