@@ -1,9 +1,9 @@
 import { Subject } from 'rxjs-compat';
 import { throwError } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpEventType } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Post } from './post.model';
-import { map, catchError } from 'rxjs/operators';
+import { map, catchError, tap } from 'rxjs/operators';
 @Injectable({ providedIn: 'root' })
 export class PostService {
     error = new Subject<string>();
@@ -30,7 +30,11 @@ export class PostService {
     fetchPosts() {
         return this.http
             .get<{ [key: string]: Post }>(
-                'https://angular-practice-6f5b3-default-rtdb.asia-southeast1.firebasedatabase.app/posts.json'
+                'https://angular-practice-6f5b3-default-rtdb.asia-southeast1.firebasedatabase.app/posts.json',
+                {
+                    observe: 'events',
+                    responseType: 'json'
+                }
             )
             .pipe(
                 map((responseData) => {
@@ -53,8 +57,24 @@ export class PostService {
     }
 
     deletePosts() {
-        return this.http.delete(
-            'https://angular-practice-6f5b3-default-rtdb.asia-southeast1.firebasedatabase.app/posts.json'
-        );
+        return this.http
+            .delete(
+                'https://angular-practice-6f5b3-default-rtdb.asia-southeast1.firebasedatabase.app/posts.json',
+                {
+                    observe: 'events',
+                    responseType: 'json',
+                }
+            )
+            .pipe(
+                tap((event) => {
+                    console.log(event);
+                    if (event.type === HttpEventType.Sent) {
+                        //...
+                    }
+                    if (event.type === HttpEventType.Response) {
+                        console.log(event.body);
+                    }
+                })
+            );
     }
 }
