@@ -1,51 +1,60 @@
 import { Component, OnInit } from '@angular/core';
 import {
     AbstractControl,
+    FormArray,
     FormBuilder,
     FormControl,
     FormGroup,
     ValidatorFn,
     Validators,
 } from '@angular/forms';
+import { CustomValidators } from './custom-validators';
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-    status = ['stable', 'critical', 'finished'];
-    projectForm: FormGroup;
-    forbiddenNames = ['minh', 'kiet', 'phong', 'test'];
+    studentForm: FormGroup;
     constructor(private fb: FormBuilder) {}
 
     ngOnInit(): void {
-        this.projectForm = new FormGroup({
-            name: new FormControl(null, [
-                Validators.required,
-                forbiddenNameValidator(this.forbiddenNames),
-            ]),
+        this.studentForm = new FormGroup({
+            name: new FormControl(null, [CustomValidators.customRequired]),
             email: new FormControl(null, [
+                CustomValidators.customRequired,
                 Validators.email,
-                Validators.required,
             ]),
-            status: new FormControl(null, [Validators.required]),
+            password: new FormControl(null, [
+                CustomValidators.customRequired,
+                Validators.minLength(6),
+            ]),
+            confirmPassword: new FormControl(null, [
+                CustomValidators.customRequired,
+                Validators.minLength(6),
+                CustomValidators.confirmPass('password'),
+            ]),
+            certificates: new FormArray([]),
         });
     }
 
+    onAddCertificate() {
+        const group = this.fb.group({
+            language: [null, CustomValidators.customRequired],
+            certificate: [null, CustomValidators.customRequired],
+        });
+        this.certificates.push(group);
+    }
+
+    get certificates() {
+        return this.studentForm.get('certificates') as FormArray;
+    }
+
     onSubmit() {
-        if (this.projectForm.valid) {
-            console.log(this.projectForm.value);
+        if (this.studentForm.valid) {
+            console.log(this.studentForm.value);
         } else {
             alert('Please type valid inputs');
         }
     }
 }
-
-function forbiddenNameValidator(name: string[]): ValidatorFn {
-    return (control: AbstractControl): { [key: string]: any } | null => {
-        const forbidden = name.includes(control.value);
-        return forbidden ? { forbiddenName: { value: control.value } } : null;
-    };
-}
-
-
