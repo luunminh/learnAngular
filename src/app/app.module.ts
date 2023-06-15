@@ -16,6 +16,7 @@ import { ShoppingListService } from './shopping-list/shopping-list.service';
 import { RecipesStartComponent } from './recipes/recipes-start/recipes-start.component';
 import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
 import { HttpClientModule } from '@angular/common/http';
+import { AuthComponent } from './auth/auth.component';
 @NgModule({
     declarations: [
         AppComponent,
@@ -29,6 +30,7 @@ import { HttpClientModule } from '@angular/common/http';
         DropdownDirective,
         RecipesStartComponent,
         RecipeEditComponent,
+        AuthComponent,
     ],
     imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
     providers: [ShoppingListService],
