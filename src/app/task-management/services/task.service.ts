@@ -6,6 +6,7 @@ import { SnackbarService } from './snackbar.service';
 
 @Injectable({ providedIn: 'root' })
 export class TaskService {
+    isOpenDashBoard = new Subject<boolean>();
     tasks: Task[] = [
         {
             id: 1,

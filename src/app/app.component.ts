@@ -1,6 +1,4 @@
-import { Dialog } from '@angular/cdk/dialog';
-import { Component, Output } from '@angular/core';
-import { TaskListComponent } from './components/tasks/task-list/task-list.component';
+import { Component } from '@angular/core';
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
@@ -8,15 +6,4 @@ import { TaskListComponent } from './components/tasks/task-list/task-list.compon
 })
 export class AppComponent {
     constructor() {}
-
-    isOpenAddTask: boolean = false;
-    isOpenCalendarView = false;
-
-    onChangeAddTask() {
-        this.isOpenAddTask = !this.isOpenAddTask
-    }
-
-    onChangeCalendarView() {
-        this.isOpenCalendarView = !this.isOpenCalendarView
-    }
 }

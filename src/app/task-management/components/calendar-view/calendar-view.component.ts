@@ -2,6 +2,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { CalendarOptions } from '@fullcalendar/core'; // useful for typechecking
 import dayGridPlugin from '@fullcalendar/daygrid';
 import { TaskService } from '../../services/task.service';
+import { Router } from '@angular/router';
 @Component({
     selector: 'app-calendar-view',
     templateUrl: './calendar-view.component.html',
@@ -11,7 +12,7 @@ export class CalendarViewComponent implements OnInit {
     calendarOptions: CalendarOptions;
     @Output() backToHomePage = new EventEmitter<any>();
 
-    constructor(private taskService: TaskService) {}
+    constructor(private taskService: TaskService, private route: Router) {}
 
     ngOnInit(): void {
         this.calendarOptions = {
@@ -23,6 +24,7 @@ export class CalendarViewComponent implements OnInit {
     }
 
     onBackToHomePage() {
-        this.backToHomePage.emit();
+        this.taskService.isOpenDashBoard.next(true);
+        this.route.navigate(['../task-management']);
     }
 }

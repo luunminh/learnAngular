@@ -1,0 +1,13 @@
+<div class="container">
+    <div class="row" fxLayout="column" fxLayoutAlign="center center">
+        <div class="col-lg-12 col-md-12 col-xs-12">
+            <h3 class="header-title">Todos</h3>
+        </div>
+        <div class="col-lg-8 col-md-8 col-xs-8">
+            <app-task-list *ngIf="isDashBoard" (onChangeAddTask)="onChangeAddTask()"
+                (onChangeCalendarView)="onChangeCalendarView()">
+            </app-task-list>
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>

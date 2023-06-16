@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Output, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { TaskService } from '../../../services/task.service';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-task-add',
@@ -11,10 +12,11 @@ export class TaskAddComponent implements OnInit {
     @Output() closeAddTask = new EventEmitter<any>();
     taskForm: FormGroup | undefined;
 
-    constructor(private taskService: TaskService) {}
+    constructor(private taskService: TaskService, private route: Router) {}
 
     onCloseAddTask() {
-        this.closeAddTask.emit();
+        this.taskService.isOpenDashBoard.next(true);
+        this.route.navigate(['../task-management']);
     }
 
     ngOnInit(): void {
