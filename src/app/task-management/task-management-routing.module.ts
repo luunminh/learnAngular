@@ -5,7 +5,7 @@ import { CalendarViewComponent } from './components/calendar-view/calendar-view.
 import { TaskAddComponent } from './components/tasks/task-add/task-add.component';
 const taskManagementRoutes: Routes = [
     {
-        path: 'task-management',
+        path: '',
         component: TaskManagementComponent,
         children: [
             { path: 'calendar-view', component: CalendarViewComponent },

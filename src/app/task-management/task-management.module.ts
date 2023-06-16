@@ -21,6 +21,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ReactiveFormsModule } from '@angular/forms';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { CommonModule } from '@angular/common';
+import { SnackbarService } from './services/snackbar.service';
 import { TaskManagementComponent } from './task-management.component';
 import { CalendarViewComponent } from './components/calendar-view/calendar-view.component';
 @NgModule({
@@ -53,6 +54,7 @@ import { CalendarViewComponent } from './components/calendar-view/calendar-view.
     ],
     providers: [
         TaskService,
+        SnackbarService,
         { provide: MAT_DIALOG_DATA, useValue: { hasBackdrop: true } },
     ],
     exports: [],

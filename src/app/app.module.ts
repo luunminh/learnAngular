@@ -11,7 +11,6 @@ import { TaskManagementModule } from './task-management/task-management.module';
     imports: [
         BrowserModule,
         CommonModule,
-        TaskManagementModule,
         AppRoutingModule,
         BrowserAnimationsModule,
 
