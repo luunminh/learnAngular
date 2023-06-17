@@ -8,6 +8,10 @@ const routes: Routes = [
       //lazy-loading routing
       import('./task-management/task-management.module').then(m => m.TaskManagementModule),
   },
+  {
+    path: 'auth',
+    loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule),
+  },
 ];
 
 @NgModule({

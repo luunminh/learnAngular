@@ -1,0 +1,64 @@
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1">
+            <h1>Student Information</h1>
+            <form *ngIf="studentForm" class="form-group" [formGroup]="studentForm" (ngSubmit)="onSubmit()">
+                <div class="form-group">
+                    <label>Student name</label>
+                    <input type="text" class="form-control" formControlName="name">
+                    <span class="alert-warning"
+                        *ngIf="!studentForm.get('name').valid && studentForm.get('name').touched">
+                        Please enter a valid name
+                    </span>
+                </div>
+                <div class="form-group">
+                    <label>Student email</label>
+                    <input type="email" class="form-control" formControlName="email">
+                    <span class="alert-warning"
+                        *ngIf="!studentForm.get('email').valid && studentForm.get('email').touched">Please enter a valid
+                        email</span>
+                </div>
+                <div class="form-group">
+                    <label>Student password</label>
+                    <input type="password" class="form-control" formControlName="password">
+                    <span class="alert-warning"
+                        *ngIf="!studentForm.get('password').valid && studentForm.get('password').touched">Please enter a
+                        valid
+                        password</span>
+                </div>
+                <div class="form-group">
+                    <label>Student confirm password</label>
+                    <input type="password" class="form-control" formControlName="confirmPassword">
+                    <span class="alert-warning"
+                        *ngIf="!studentForm.get('confirmPassword').valid && studentForm.get('confirmPassword').touched">Please
+                        enter a valid
+                        confirm password</span>
+                </div>
+                <div class="form-group" formArrayName="certificates">
+                    <label>Languages certificate</label>
+                    <button type="button" (click)="onAddCertificate()" class="btn btn-default"
+                        style="display: block;">Add</button>
+                    <div *ngFor="let certificateControl of certificates.controls; let i = index">
+                        <div class="form-group" [formGroupName]="i">
+                            <label>Languages</label>
+                            <input type="text" class="form-control" formControlName="language">
+                            <span class="alert-warning" style="display: block;"
+                                *ngIf="!certificateControl.get('language').valid && certificateControl.get('language').touched">Please
+                                enter a valid
+                                language</span>
+                            <label>Certificate</label>
+                            <input type="text" class="form-control" formControlName="certificate">
+                            <span class="alert-warning"
+                                *ngIf="!certificateControl.get('certificate').valid && certificateControl.get('certificate').touched">Please
+                                enter a valid
+                                certificate
+                            </span>
+                            <hr>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
