@@ -1,12 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { PreloadAllModules } from '@angular/router';
+import { AuthGuard } from './shared/auth.guard';
 const routes: Routes = [
   {
     path: 'task-management',
     loadChildren: () =>
       //lazy-loading routing
       import('./task-management/task-management.module').then(m => m.TaskManagementModule),
+      canActivate: [AuthGuard]
   },
   {
     path: 'auth',

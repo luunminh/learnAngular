@@ -1,6 +1,8 @@
+import { AuthService } from './auth.service';
 import { Component } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { CustomValidators } from '../shared/custom-validators';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-auth',
@@ -9,7 +11,7 @@ import { CustomValidators } from '../shared/custom-validators';
 })
 export class AuthComponent {
   studentForm: FormGroup;
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {
     this.studentForm = new FormGroup({
@@ -39,7 +41,8 @@ export class AuthComponent {
 
   onSubmit() {
     if (this.studentForm.valid) {
-      console.log(this.studentForm.value);
+      this.authService.setUser(this.studentForm.value);
+      this.router.navigate(['task-management']);
     } else {
       alert('Please type valid inputs');
     }
