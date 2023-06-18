@@ -3,7 +3,7 @@ import { User } from './user.model';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { CanActivateChildFn, CanActivateFn } from '@angular/router';
-import { AuthService } from '../auth/auth.service';
+import { AuthService } from '../auth/service/auth.service';
 import { map, tap } from 'rxjs/operators';
 @Injectable({ providedIn: 'root' })
 export class AuthGuard {

@@ -1,46 +1,55 @@
+import { DataStorageService } from './../../shared/data-storage.service';
 import { Event } from '../model/event.model';
 import { Injectable } from '@angular/core';
 import { Status, Task } from '../model/task.model';
-import { Subject } from 'rxjs-compat';
+import { BehaviorSubject, Subject } from 'rxjs-compat';
 import { SnackbarService } from '../../shared/snackbar.service';
 
 @Injectable({ providedIn: 'root' })
 export class TaskService {
+  taskChanged = new BehaviorSubject<Task[]>([]);
   isOpenDashBoard = new Subject<boolean>();
   tasks: Task[] = [
-    {
-      id: 1,
-      title: 'Learn Angular',
-      description:
-        'First App Tutorial - Angular Homes gets you started with Angular The First App tutorial guides you through building an Angular app by taking you step by step through the fundamentals of building an application in Angular.',
-      status: Status.doing,
-      createAt: 1677054779,
-    },
-    {
-      id: 2,
-      title: 'Learn ReactJS',
-      description:
-        'Lib React lets you build user interfaces out of individual pieces called components. Create your own React components like Thumbnail, LikeButton, and Video. Then combine them into entire screens, pages, and apps.',
-      status: Status.finished,
-      createAt: 1677054779,
-    },
-    {
-      id: 3,
-      title: 'Learn NodeJS',
-      description:
-        'Node lets you build user interfaces out of individual pieces called components. Create your own Node components like Thumbnail, LikeButton, and Video. Then combine them into entire screens, pages, and apps.',
-      status: Status.doing,
-      createAt: 1686507641,
-    },
+    // {
+    //   id: 1,
+    //   title: 'Learn Angular',
+    //   description:
+    //     'First App Tutorial - Angular Homes gets you started with Angular The First App tutorial guides you through building an Angular app by taking you step by step through the fundamentals of building an application in Angular.',
+    //   status: Status.doing,
+    //   createAt: 1677054779,
+    // },
+    // {
+    //   id: 2,
+    //   title: 'Learn ReactJS',
+    //   description:
+    //     'Lib React lets you build user interfaces out of individual pieces called components. Create your own React components like Thumbnail, LikeButton, and Video. Then combine them into entire screens, pages, and apps.',
+    //   status: Status.finished,
+    //   createAt: 1677054779,
+    // },
+    // {
+    //   id: 3,
+    //   title: 'Learn NodeJS',
+    //   description:
+    //     'Node lets you build user interfaces out of individual pieces called components. Create your own Node components like Thumbnail, LikeButton, and Video. Then combine them into entire screens, pages, and apps.',
+    //   status: Status.doing,
+    //   createAt: 1686507641,
+    // },
   ];
   addedProductEvent = new Subject<Task>();
   updatedProductEvent = new Subject<number>();
   deletedProductEvent = new Subject<number>();
 
-  constructor(private snackbarService: SnackbarService) {}
+  constructor(private snackbarService: SnackbarService, private dataService: DataStorageService) {}
 
   getTasks() {
     return this.tasks.slice();
+  }
+
+  setTasks() {
+    this.dataService.fetchTasks().subscribe(tasks => {
+      this.tasks = tasks;
+    });
+    this.taskChanged.next(this.tasks.slice());
   }
 
   getTaskById(id: number) {

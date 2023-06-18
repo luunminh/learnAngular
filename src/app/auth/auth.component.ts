@@ -1,5 +1,5 @@
 import { SnackbarService } from './../shared/snackbar.service';
-import { AuthService, AuthResponseData } from './auth.service';
+import { AuthService, AuthResponseData } from './service/auth.service';
 import { Component } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { CustomValidators } from '../shared/custom-validators';

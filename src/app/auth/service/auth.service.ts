@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { User } from '../shared/user.model';
+import { User } from '../../shared/user.model';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
@@ -17,7 +17,7 @@ export interface AuthResponseData {
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   user = new BehaviorSubject<User>(null);
-
+  private tokenExpirationTimer: any;
   constructor(private http: HttpClient, private router: Router) {}
 
   signUp(email: string, password: string) {
@@ -52,6 +52,8 @@ export class AuthService {
     const expirationDate = new Date(new Date().getTime() + expiresIn * 1000);
     const user = new User(userId, email, token, expirationDate);
     this.user.next(user);
+    this.autoLogout(expiresIn * 1000);
+    localStorage.setItem('userData', JSON.stringify(user));
   }
 
   login(email: string, password: string) {
@@ -88,8 +90,38 @@ export class AuthService {
       );
   }
 
+  autoLogin() {
+    const userData: {
+      email: string;
+      id: string;
+      _token: string;
+      _expirationDate: string;
+    } = JSON.parse(localStorage.getItem('userData'));
+    if (!userData) {
+      return;
+    }
+
+    const loadedUser = new User(userData.id, userData.email, userData._token, new Date(userData._expirationDate));
+    if (loadedUser.token) {
+      const expirationDuration = new Date(userData._expirationDate).getTime() - new Date().getTime();
+      this.autoLogout(expirationDuration);
+      this.user.next(loadedUser);
+    }
+  }
+
   logout() {
     this.user.next(null);
+    localStorage.removeItem('userData');
     this.router.navigate(['/auth']);
+    if (this.tokenExpirationTimer) {
+      clearTimeout(this.tokenExpirationTimer);
+    }
+    this.tokenExpirationTimer = null;
+  }
+
+  autoLogout(expirationDuration: number) {
+    this.tokenExpirationTimer = setTimeout(() => {
+      this.logout();
+    }, expirationDuration);
   }
 }
