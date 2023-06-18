@@ -25,8 +25,10 @@ export class TaskAddComponent implements OnInit {
       },
     });
     return ref.afterClosed().pipe(
-      tap(() => {
-        this.taskService.isOpenDashBoard.next(true);
+      tap(rs => {
+        if (rs) {
+          this.taskService.isOpenDashBoard.next(true);
+        }
       }),
     );
   }
@@ -55,6 +57,7 @@ export class TaskAddComponent implements OnInit {
 
   async onSubmit() {
     if (this.taskForm.valid) {
+      this.isEditing = false;
       const currentTasks = this.taskService.getTasks();
       const id = currentTasks[currentTasks.length - 1].id + 1;
       const newTask = await {
