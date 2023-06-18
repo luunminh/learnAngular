@@ -10,7 +10,7 @@ export class AuthGuard {
   constructor(private authService: AuthService, private snackbarService: SnackbarService) {}
 
   canActivate: CanActivateFn = (route, state) => {
-    return this.authService.curUser.pipe(
+    return this.authService.user.pipe(
       map(user => {
         if (user === null) {
           this.snackbarService.onOpenSnackBar('Please login to view tasks', 'Close', 1000);

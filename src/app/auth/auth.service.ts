@@ -2,8 +2,9 @@ import { HttpClient } from '@angular/common/http';
 import { User } from '../shared/user.model';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, of } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { catchError, tap } from 'rxjs/operators';
 import { throwError } from 'rxjs';
+import { Router } from '@angular/router';
 export interface AuthResponseData {
   idToken: string;
   email: string;
@@ -15,10 +16,9 @@ export interface AuthResponseData {
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  private user: User = null;
-  userChanged = new BehaviorSubject<User>({ ...this.user });
+  user = new BehaviorSubject<User>(null);
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   signUp(email: string, password: string) {
     return this.http
@@ -42,7 +42,16 @@ export class AuthService {
           }
           return throwError(errMsg);
         }),
+        tap(resData => {
+          this.handleAuthentication(resData.email, resData.localId, resData.idToken, +resData.expiresIn);
+        }),
       );
+  }
+
+  handleAuthentication(email: string, userId: string, token: string, expiresIn: number) {
+    const expirationDate = new Date(new Date().getTime() + expiresIn * 1000);
+    const user = new User(userId, email, token, expirationDate);
+    this.user.next(user);
   }
 
   login(email: string, password: string) {
@@ -73,17 +82,14 @@ export class AuthService {
           }
           return throwError(errMsg);
         }),
+        tap(resData => {
+          this.handleAuthentication(resData.email, resData.localId, resData.idToken, +resData.expiresIn);
+        }),
       );
   }
 
-  get curUser(): Observable<any> {
-    if (this.user) {
-      return of({ ...this.user });
-    } else return of(null);
-  }
-
-  setUser(newUser: User) {
-    this.user = newUser;
-    this.userChanged.next({ ...this.user });
+  logout() {
+    this.user.next(null);
+    this.router.navigate(['/auth']);
   }
 }

@@ -8,7 +8,8 @@
       <ul class="nav navbar-right navbar-nav">
         <ul class="nav navbar-nav">
           <li routerLinkActive="active"><a routerLink="task-management">Tasks management</a></li>
-          <li routerLinkActive="active"><a routerLink="auth">Login</a></li>
+          <li routerLinkActive="active" *ngIf="!isAuthenticated"><a routerLink="auth">Login</a></li>
+          <li *ngIf="isAuthenticated" style="cursor: pointer;"><a (click)="onLogout()">Logout</a></li>
         </ul>
       </ul>
     </div>

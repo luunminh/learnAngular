@@ -76,7 +76,7 @@ export class AuthComponent {
           this.error = null;
           let data = this.studentForm.value;
           delete data['confirmPassword'];
-          this.authService.setUser(data);
+          // this.authService.setUser(data);
           this.isLoading = false;
           this.router.navigate(['task-management']);
         },
